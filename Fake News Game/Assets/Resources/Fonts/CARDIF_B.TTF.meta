@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: 4530277532211604da34ea6f3e3efaef
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Cardiff
+  fontNames:
+  - Cardiff
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 1b52fce32706bc84c95db3e736db5fa3, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
