@@ -22,13 +22,15 @@ public class GameState : MonoBehaviour {
     private string[] replaceOptions3; //initialize this
     private NewsHeadline currentNews;
     public int counter;
+    public bool gameOver;
 
     // Use this for initialization
     void Start () {
         apocalypseMeter = 0;
         geld = 1000;
         counter = 0;
-
+        gameOver = false;
+        
         Button btn1 = createNewHeadlineButton.GetComponent<Button>();
         Button btn2 = submitNewHeadlineButton.GetComponent<Button>();
         Button btn3 = replaceButton1.GetComponent<Button>();
@@ -40,21 +42,24 @@ public class GameState : MonoBehaviour {
         btn3.onClick.AddListener(replaceButton1Clicked);
         btn4.onClick.AddListener(replaceButton2Clicked);
         btn5.onClick.AddListener(replaceButton3Clicked);
+        createNewHeadlineButtonClicked();
     }
 	
 	// Update is called once per frame
 	void Update () {
+        if(!gameOver) {
         if(apocalypseMeter > 100)
         {
-            gameOverSchlecht();
+                gameOverSchlechtMethod();
         }
         if(geld <= 0)
         {
             geld = 0;
-            gameOverGut();
+                gameOverGutMethod();
         }
-		
-	}
+        }
+
+    }
 
 
     void createNewHeadlineButtonClicked()
@@ -123,13 +128,26 @@ public class GameState : MonoBehaviour {
             feedBackTextText = "schlecht";
         }
     }
-    void gameOverGut()
+    void gameOverGutMethod()
     {
         //TODO: GAMEOVER GUT
+        createNewHeadlineButton.SetActive(false);
+        submitNewHeadlineButton.SetActive(false);
+        replaceButton1.SetActive(false);
+        replaceButton2.SetActive(false);
+        replaceButton3.SetActive(false);
+        feedBackText.SetActive(false);
+
         gameOverGut.SetActive(true);
     }
-    void gameOverSchlecht()
+    void gameOverSchlechtMethod()
     {
+        createNewHeadlineButton.SetActive(false);
+        submitNewHeadlineButton.SetActive(false);
+        replaceButton1.SetActive(false);
+        replaceButton2.SetActive(false);
+        replaceButton3.SetActive(false);
+        feedBackText.SetActive(false);
         //TODO: GAMEOVER SCHLECHT
         gameOverSchlecht.SetActive(true);
     }
