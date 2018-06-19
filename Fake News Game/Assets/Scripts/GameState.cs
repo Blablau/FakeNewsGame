@@ -15,22 +15,30 @@ public class GameState : MonoBehaviour {
     public GameObject feedBackText;
     public GameObject gameOverGut;
     public GameObject gameOverSchlecht;
+    public GameObject Lueckentext;
+    public GameObject Luecke;
     private string feedBackTextText;
-    private string[] headlineWithGap; //initialize this
-    private string[] replaceOptions1; //initialize this
-    private string[] replaceOptions2; //initialize this
-    private string[] replaceOptions3; //initialize this
-    private NewsHeadline currentNews;
+    private string[] headlineWithGap = new string[10]; //initialize this
+    private string[] replaceOptions1 = new string[10]; //initialize this
+    private string[] replaceOptions2 = new string[10]; //initialize this
+    private string[] replaceOptions3 = new string[10]; //initialize this
     public int counter;
+    private int replaceNumber;
     public bool gameOver;
 
     // Use this for initialization
     void Start () {
+        
         apocalypseMeter = 0;
         geld = 1000;
         counter = 0;
+        replaceNumber = 0;
         gameOver = false;
-        
+        headlineWithGap[0] = "Obama says :  Trump’s behaviour is           ";
+        replaceOptions1[0] = "Childish";
+        replaceOptions2[0] = "Immature";
+        replaceOptions3[0] = "Stupid";
+
         Button btn1 = createNewHeadlineButton.GetComponent<Button>();
         Button btn2 = submitNewHeadlineButton.GetComponent<Button>();
         Button btn3 = replaceButton1.GetComponent<Button>();
@@ -43,6 +51,8 @@ public class GameState : MonoBehaviour {
         btn4.onClick.AddListener(replaceButton2Clicked);
         btn5.onClick.AddListener(replaceButton3Clicked);
         createNewHeadlineButtonClicked();
+        
+
     }
 	
 	// Update is called once per frame
@@ -64,8 +74,10 @@ public class GameState : MonoBehaviour {
 
     void createNewHeadlineButtonClicked()
     {
-        currentNews = new NewsHeadline(headlineWithGap[counter], replaceOptions1[counter], replaceOptions2[counter], replaceOptions3[counter]);
-        counter++;
+        Debug.Log("createNewHeadlineButtonClicked()");
+        Lueckentext.GetComponent<Text>().text = headlineWithGap[counter];
+        Luecke.GetComponent<Text>().text = "_____";
+        replaceNumber = 0;
         createNewHeadlineButton.SetActive(false);
         submitNewHeadlineButton.SetActive(true);
         replaceButton1.SetActive(true);
@@ -77,23 +89,25 @@ public class GameState : MonoBehaviour {
 
     void submitNewHeadlineButtonClicked()
     {
-        if(currentNews.replaceNumber != 0)
+        Debug.Log("submitNewHeadlineButtonClicked()");
+        if (replaceNumber != 0)
         {
-            if(currentNews.replaceNumber == 1)
+            if(replaceNumber == 1)
             {
                 geld += Random.Range(50, 100);
                 
 
-            } else if (currentNews.replaceNumber == 2)
+            } else if (replaceNumber == 2)
             {
                 geld += Random.Range(100, 200);
                 apocalypseMeter += Random.Range(5, 15);
-            } else if (currentNews.replaceNumber == 3)
+            } else if (replaceNumber == 3)
             {
                 geld += Random.Range(500, 1000);
                 apocalypseMeter += Random.Range(25, 30);
             }
             setFeedbackText();
+            counter++;
             geld -= 500; //MIETE
             createNewHeadlineButton.SetActive(true);
             submitNewHeadlineButton.SetActive(false);
@@ -105,31 +119,39 @@ public class GameState : MonoBehaviour {
     }
     void replaceButton1Clicked()
     {
-        currentNews.replaceTextPassage1();
+        Debug.Log("replaceButton1Clicked()");
+        replaceNumber = 1;
+        Luecke.GetComponent<Text>().text = replaceOptions1[counter];
     }
     void replaceButton2Clicked()
     {
-        currentNews.replaceTextPassage2();
+        Debug.Log("replaceButton2Clicked()");
+        replaceNumber = 2;
+        Luecke.GetComponent<Text>().text = replaceOptions2[counter];
     }
     void replaceButton3Clicked()
     {
-        currentNews.replaceTextPassage3();
+        Debug.Log("replaceButton3Clicked()");
+        replaceNumber = 3;
+        Luecke.GetComponent<Text>().text = replaceOptions3[counter];
     }
     void setFeedbackText()
     {
-        if(currentNews.replaceNumber == 1)
+        Debug.Log("setFeedbackText()");
+        if (replaceNumber == 1)
         {
             feedBackTextText = "gut";
-        } else if (currentNews.replaceNumber == 2)
+        } else if (replaceNumber == 2)
         {
             feedBackTextText = "nicht gut";
-        } else if (currentNews.replaceNumber == 3)
+        } else if (replaceNumber == 3)
         {
             feedBackTextText = "schlecht";
         }
     }
     void gameOverGutMethod()
     {
+        Debug.Log("gameOverGutMethod()");
         //TODO: GAMEOVER GUT
         createNewHeadlineButton.SetActive(false);
         submitNewHeadlineButton.SetActive(false);
@@ -142,6 +164,7 @@ public class GameState : MonoBehaviour {
     }
     void gameOverSchlechtMethod()
     {
+        Debug.Log("gameOverSchlechtMethod()");
         createNewHeadlineButton.SetActive(false);
         submitNewHeadlineButton.SetActive(false);
         replaceButton1.SetActive(false);
