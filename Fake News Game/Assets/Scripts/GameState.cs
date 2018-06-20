@@ -17,6 +17,8 @@ public class GameState : MonoBehaviour {
     public GameObject gameOverSchlecht;
     public GameObject Lueckentext;
     public GameObject Luecke;
+    public GameObject newsBackground;
+    public GameObject newsImage;
     private string feedBackTextText;
     private string[] headlineWithGap = new string[10]; //initialize this
     private string[] replaceOptions1 = new string[10]; //initialize this
@@ -55,19 +57,19 @@ public class GameState : MonoBehaviour {
         replaceOptions1[3] = "Trump";
         replaceOptions2[3] = "Icebear";
         replaceOptions3[3] = "Cow"; // richtig
-        headlineWithGap[4] = "2017 there were _____ refugees in Germany!";
+        headlineWithGap[4] = "2017 there were _____ refugees \nin Germany!";
         replaceOptions1[4] = "34.880 syrian";
         replaceOptions2[4] = "60.000 syrian";
         replaceOptions3[4] = "60.000 terrorist";
-        headlineWithGap[5] = "Investigations proved: _____ the Brexit vote!";
-        replaceOptions1[5] = "Twitter bots affected";
-        replaceOptions2[5] = "Twitter bots didn’t affect";
-        replaceOptions3[5] = "Twitter bots didn’t exist until after";
-        headlineWithGap[6] = "North Korean leader and Trump discussed _____";
+        headlineWithGap[5] = "Investigations proved: _____the Brexit vote!";
+        replaceOptions1[5] = "Twitter bots affected \n";
+        replaceOptions2[5] = "Twitter bots didn’t \naffect ";
+        replaceOptions3[5] = "Twitter bots didn’t \nexist until after ";
+        headlineWithGap[6] = "North Korean leader and Trump \ndiscussed _____";
         replaceOptions1[6] = "nuclear disarmament";
         replaceOptions2[6] = "nuclear wars";
         replaceOptions3[6] = "nuclear wars in the future";
-        headlineWithGap[7] = "School shooter killed _____";
+        headlineWithGap[7] = "School shooter killed: \n_____";
         replaceOptions1[7] = "17 people";
         replaceOptions2[7] = "17 children";
         replaceOptions3[7] = "17 children like in video game shooter";
@@ -85,8 +87,6 @@ public class GameState : MonoBehaviour {
         btn4.onClick.AddListener(replaceButton2Clicked);
         btn5.onClick.AddListener(replaceButton3Clicked);
         createNewHeadlineButtonClicked();
-        
-
     }
 	
 	// Update is called once per frame
@@ -98,12 +98,12 @@ public class GameState : MonoBehaviour {
         if (!gameOver) {
         if(apocalypseMeter > 100)
         {
-                gameOverSchlechtMethod();
+                //gameOverSchlechtMethod();
         }
         if(geld <= 0)
         {
             geld = 0;
-                gameOverGutMethod();
+                //gameOverGutMethod();
         }
         }
 
@@ -123,6 +123,8 @@ public class GameState : MonoBehaviour {
         //replaceButton3.SetActive(true);
         //feedBackText.SetActive(false);
         createArticleContent.SetActive(true);
+        newsBackground.SetActive(true);
+        newsImage.SetActive(true);
         dashboardContent.SetActive(false);
 
         if (counter < 7)
@@ -163,6 +165,8 @@ public class GameState : MonoBehaviour {
             //replaceButton2.SetActive(false);
             //replaceButton3.SetActive(false);
             createArticleContent.SetActive(false);
+            newsBackground.SetActive(false);
+            newsImage.SetActive(false);
             dashboardContent.SetActive(true);
         }
     }
