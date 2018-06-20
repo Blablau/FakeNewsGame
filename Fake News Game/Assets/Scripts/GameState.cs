@@ -28,6 +28,8 @@ public class GameState : MonoBehaviour {
     private string[] replaceOptions3 = new string[10]; //initialize this
     private string[] imageOptions = new string[] { "trump.jpg", "fakeNews.jpg", "obama.jpg", "trump2.jpg", "whiteHouse.jpg", 
                     "nuclear.jpg", "nuclear2.jpg", "nuclear3.jpg", "boat.jpg", "cow.jpg", "refugee.jpg" };
+    private string image_GameOverSchlecht = "weltuntergang.jpg";
+    private string image_GameOverGut = "closed.jpg";
     private Vector2 size = new Vector2(100, 100); // image size
     public int counter;
     private int replaceNumber;
@@ -107,12 +109,14 @@ public class GameState : MonoBehaviour {
         if (!gameOver) {
         if(apocalypseMeter > 100)
         {
-                //gameOverSchlechtMethod();
+                gameOverSchlechtMethod();
+                gameOver = true;
         }
         if(geld <= 0)
         {
             geld = 0;
-                //gameOverGutMethod();
+            gameOverGutMethod();
+            gameOver = true;
         }
         }
 
@@ -233,13 +237,27 @@ public class GameState : MonoBehaviour {
     void gameOverGutMethod()
     {
         Debug.Log("gameOverGutMethod()");
-        //TODO: GAMEOVER GUT
         createNewHeadlineButton.SetActive(false);
         submitNewHeadlineButton.SetActive(false);
         replaceButton1.SetActive(false);
         replaceButton2.SetActive(false);
         replaceButton3.SetActive(false);
-        feedBackText.SetActive(false);
+        feedBackText.SetActive(true);
+        pictureButton.SetActive(false);
+        apoMeterImage.enabled = false;
+        moneyText.enabled = false;
+        apocalypseMeter = 0;
+
+        createArticleContent.SetActive(true);
+        newsBackground.SetActive(true);
+        newsImage.SetActive(true);
+        dashboardContent.SetActive(true);
+
+        Lueckentext.GetComponent<Text>().text = "Agency closed after\ntoo much FakeNews competition";
+        string path = "./Assets/Resources/Images/" + image_GameOverGut;
+        Texture2D texture = loadImage(size, Path.GetFullPath(path));
+        newsImage.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite =
+            Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f), 100.0f);
 
         gameOverGut.SetActive(true);
     }
@@ -251,8 +269,23 @@ public class GameState : MonoBehaviour {
         replaceButton1.SetActive(false);
         replaceButton2.SetActive(false);
         replaceButton3.SetActive(false);
-        feedBackText.SetActive(false);
-        //TODO: GAMEOVER SCHLECHT
+        feedBackText.SetActive(true);
+        pictureButton.SetActive(false);
+        apoMeterImage.enabled = false;
+        moneyText.enabled = false;
+        apocalypseMeter = 0;
+
+        createArticleContent.SetActive(true);
+        newsBackground.SetActive(true);
+        newsImage.SetActive(true);
+        dashboardContent.SetActive(true);
+
+        Lueckentext.GetComponent<Text>().text = "People too afraid of future; Revolts\nagainst government insitutions underway!";
+        string path = "./Assets/Resources/Images/" + image_GameOverSchlecht;
+        Texture2D texture = loadImage(size, Path.GetFullPath(path));
+        newsImage.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite =
+            Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f), 100.0f);
+
         gameOverSchlecht.SetActive(true);
     }
 
