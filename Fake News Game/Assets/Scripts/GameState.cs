@@ -26,6 +26,11 @@ public class GameState : MonoBehaviour {
     private int replaceNumber;
     public bool gameOver;
 
+    public Image apoMeterImage;
+    public Text moneyText;
+    public GameObject createArticleContent;
+    public GameObject dashboardContent;
+
     // Use this for initialization
     void Start () {
         
@@ -65,7 +70,11 @@ public class GameState : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if(!gameOver) {
+
+        apoMeterImage.fillAmount = (float)apocalypseMeter / 100;
+        moneyText.text = geld.ToString();
+
+        if (!gameOver) {
         if(apocalypseMeter > 100)
         {
                 gameOverSchlechtMethod();
@@ -86,12 +95,15 @@ public class GameState : MonoBehaviour {
         Lueckentext.GetComponent<Text>().text = headlineWithGap[counter] + " _____";
         //Luecke.GetComponent<Text>().text = "_____";
         replaceNumber = 0;
-        createNewHeadlineButton.SetActive(false);
-        submitNewHeadlineButton.SetActive(true);
-        replaceButton1.SetActive(true);
-        replaceButton2.SetActive(true);
-        replaceButton3.SetActive(true);
-        feedBackText.SetActive(false);
+        //createNewHeadlineButton.SetActive(false);
+        //submitNewHeadlineButton.SetActive(true);
+        //replaceButton1.SetActive(true);
+        //replaceButton2.SetActive(true);
+        //replaceButton3.SetActive(true);
+        //feedBackText.SetActive(false);
+        createArticleContent.SetActive(true);
+        dashboardContent.SetActive(false);
+
         if (counter < 2)
         {
             replaceButton1.GetComponentInChildren<Text>().text = replaceOptions1[counter];
@@ -123,12 +135,14 @@ public class GameState : MonoBehaviour {
             setFeedbackText();
             counter++;
             geld -= 500; //MIETE
-            createNewHeadlineButton.SetActive(true);
-            submitNewHeadlineButton.SetActive(false);
-            feedBackText.SetActive(true);
-            replaceButton1.SetActive(false);
-            replaceButton2.SetActive(false);
-            replaceButton3.SetActive(false);
+            //createNewHeadlineButton.SetActive(true);
+            //submitNewHeadlineButton.SetActive(false);
+            //feedBackText.SetActive(true);
+            //replaceButton1.SetActive(false);
+            //replaceButton2.SetActive(false);
+            //replaceButton3.SetActive(false);
+            createArticleContent.SetActive(false);
+            dashboardContent.SetActive(true);
         }
     }
     void replaceButton1Clicked()
