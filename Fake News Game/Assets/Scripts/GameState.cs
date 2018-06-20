@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.IO;
 
 public class GameState : MonoBehaviour {
 
@@ -12,6 +13,7 @@ public class GameState : MonoBehaviour {
     public GameObject replaceButton1;
     public GameObject replaceButton2;
     public GameObject replaceButton3;
+    public GameObject pictureButton;
     public GameObject feedBackText;
     public GameObject gameOverGut;
     public GameObject gameOverSchlecht;
@@ -24,8 +26,12 @@ public class GameState : MonoBehaviour {
     private string[] replaceOptions1 = new string[10]; //initialize this
     private string[] replaceOptions2 = new string[10]; //initialize this
     private string[] replaceOptions3 = new string[10]; //initialize this
+    private string[] imageOptions = new string[] { "trump.jpg", "fakeNews.jpg", "obama.jpg", "trump2.jpg", "whiteHouse.jpg", 
+                    "nuclear.jpg", "nuclear2.jpg", "nuclear3.jpg", "boat.jpg", "cow.jpg", "refugee.jpg" };
+    private Vector2 size = new Vector2(100, 100); // image size
     public int counter;
     private int replaceNumber;
+    private int pictureCounter;
     public bool gameOver;
 
     public Image apoMeterImage;
@@ -39,6 +45,7 @@ public class GameState : MonoBehaviour {
         apocalypseMeter = 0;
         geld = 1000;
         counter = 0;
+        pictureCounter = 1;
         replaceNumber = 0;
         gameOver = false;
         headlineWithGap[0] = "Obama says: \nTrump’s behaviour is _____";
@@ -80,12 +87,14 @@ public class GameState : MonoBehaviour {
         Button btn3 = replaceButton1.GetComponent<Button>();
         Button btn4 = replaceButton2.GetComponent<Button>();
         Button btn5 = replaceButton3.GetComponent<Button>();
+        Button btn6 = pictureButton.GetComponent<Button>();
         //Calls the TaskOnClick method when you click the Button
         btn1.onClick.AddListener(createNewHeadlineButtonClicked);
         btn2.onClick.AddListener(submitNewHeadlineButtonClicked);
         btn3.onClick.AddListener(replaceButton1Clicked);
         btn4.onClick.AddListener(replaceButton2Clicked);
         btn5.onClick.AddListener(replaceButton3Clicked);
+        btn6.onClick.AddListener(pictureButtonClicked);
         createNewHeadlineButtonClicked();
     }
 	
@@ -194,6 +203,19 @@ public class GameState : MonoBehaviour {
         string newText = text.Replace("_____", replaceOptions3[counter]);
         Lueckentext.GetComponent<Text>().text = newText;
     }
+    void pictureButtonClicked()
+    {
+        Debug.Log("pictureButtonClicked()");
+        string path = "./Assets/Resources/Images/" + imageOptions[pictureCounter];
+        Texture2D texture = loadImage(size, Path.GetFullPath(path));
+        newsImage.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite =
+            Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f), 100.0f);
+        pictureCounter++;
+        if(pictureCounter == imageOptions.Length)
+        {
+            pictureCounter = 0;
+        }
+    }
     void setFeedbackText()
     {
         Debug.Log("setFeedbackText()");
@@ -232,5 +254,16 @@ public class GameState : MonoBehaviour {
         feedBackText.SetActive(false);
         //TODO: GAMEOVER SCHLECHT
         gameOverSchlecht.SetActive(true);
+    }
+
+    private static Texture2D loadImage(Vector2 size, string filePath)
+    {
+
+        byte[] bytes = File.ReadAllBytes(filePath);
+        Texture2D texture = new Texture2D((int)size.x, (int)size.y, TextureFormat.RGB24, false);
+        texture.filterMode = FilterMode.Trilinear;
+        texture.LoadImage(bytes);
+
+        return texture;
     }
 }
