@@ -136,10 +136,10 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 174045521}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.188, y: -0.028, z: -0.16483307}
-  m_LocalScale: {x: 1.8314023, y: 1.437248, z: 2.0032632}
+  m_LocalPosition: {x: 6.0492983, y: -0.9009594, z: -2901.2446}
+  m_LocalScale: {x: 58.929253, y: 46.246502, z: 64.45924}
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 840186610}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &174045523
@@ -1208,8 +1208,9 @@ RectTransform:
   - {fileID: 1927520362}
   - {fileID: 2145327612}
   - {fileID: 475272407}
+  - {fileID: 174045522}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1288,7 +1289,7 @@ Transform:
   m_LocalScale: {x: 1.2497445, y: 1.1691844, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &876556808
 GameObject:
@@ -1501,7 +1502,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1051294685
 GameObject:
@@ -1657,7 +1658,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 6
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1712,7 +1713,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1254724091
 GameObject:
@@ -2047,7 +2048,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1579428492
 GameObject:
@@ -2076,7 +2077,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1579428494
 MonoBehaviour:
@@ -2104,6 +2105,9 @@ MonoBehaviour:
   Luecke: {fileID: 618906288}
   newsBackground: {fileID: 174045521}
   newsImage: {fileID: 475272406}
+  newspaperBackground: {fileID: 174045521}
+  dollarsymbol: {fileID: 876556808}
+  mask_Bar: {fileID: 427005007}
   counter: 0
   gameOver: 0
   apoMeterImage: {fileID: 723261172}
@@ -2247,7 +2251,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1719969198
 GameObject:

@@ -21,6 +21,9 @@ public class GameState : MonoBehaviour {
     public GameObject Luecke;
     public GameObject newsBackground;
     public GameObject newsImage;
+    public GameObject newspaperBackground;
+    public GameObject dollarsymbol;
+    public GameObject mask_Bar;
     private string feedBackTextText;
     private string[] headlineWithGap = new string[10]; //initialize this
     private string[] replaceOptions1 = new string[10]; //initialize this
@@ -30,10 +33,15 @@ public class GameState : MonoBehaviour {
                     "nuclear.jpg", "nuclear2.jpg", "nuclear3.jpg", "boat.jpg", "cow.jpg", "refugee.jpg" };
     private string image_GameOverSchlecht = "weltuntergang.jpg";
     private string image_GameOverGut = "closed.jpg";
+    private string image_newsGood = "news_good.png";
+    private string image_newsBad = "news_bad.png";
+    private string image_newsVeryBad = "news_verybad.png";
+    private string image_news = "newspaper.png";
     private Vector2 size = new Vector2(100, 100); // image size
     public int counter;
     private int replaceNumber;
     private int pictureCounter;
+    private Vector3 newspaperBackground_pos;
     public bool gameOver;
 
     public Image apoMeterImage;
@@ -43,7 +51,7 @@ public class GameState : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        
+        newspaperBackground_pos = newspaperBackground.transform.position;
         apocalypseMeter = 0;
         geld = 1000;
         counter = 0;
@@ -178,7 +186,7 @@ public class GameState : MonoBehaviour {
             //replaceButton2.SetActive(false);
             //replaceButton3.SetActive(false);
             createArticleContent.SetActive(false);
-            newsBackground.SetActive(false);
+            //newsBackground.SetActive(false);
             newsImage.SetActive(false);
             dashboardContent.SetActive(true);
         }
@@ -222,17 +230,45 @@ public class GameState : MonoBehaviour {
     }
     void setFeedbackText()
     {
+        string path = "./Assets/Resources/Sprites/";
+
+
+
         Debug.Log("setFeedbackText()");
         if (replaceNumber == 1)
         {
             feedBackTextText = "gut";
+            path += image_newsGood;
         } else if (replaceNumber == 2)
         {
             feedBackTextText = "nicht gut";
+            path += image_newsBad;
         } else if (replaceNumber == 3)
         {
             feedBackTextText = "schlecht";
+            path += image_newsVeryBad;
         }
+
+
+        //TODO Set position correctly
+        if (replaceNumber != 0)
+        {
+            Texture2D texture = loadImage(size, Path.GetFullPath(path));
+            //newspaperBackground.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite =
+            newspaperBackground.GetComponent<SpriteRenderer>().sprite =
+                Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(1f, 1f), 100.0f);
+            newspaperBackground.transform.position = newspaperBackground_pos;
+        }
+        else
+        {
+            path += image_news;
+            Texture2D texture = loadImage(size, Path.GetFullPath(path));
+            //newspaperBackground.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite =
+            newspaperBackground.GetComponent<SpriteRenderer>().sprite =
+                Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(1f, 1f), 100.0f);
+            newspaperBackground.transform.position = newspaperBackground_pos;
+        }
+        replaceNumber = 0;
     }
     void gameOverGutMethod()
     {
@@ -247,6 +283,8 @@ public class GameState : MonoBehaviour {
         apoMeterImage.enabled = false;
         moneyText.enabled = false;
         apocalypseMeter = 0;
+        dollarsymbol.SetActive(false);
+        mask_Bar.SetActive(false);
 
         createArticleContent.SetActive(true);
         newsBackground.SetActive(true);
@@ -274,6 +312,8 @@ public class GameState : MonoBehaviour {
         apoMeterImage.enabled = false;
         moneyText.enabled = false;
         apocalypseMeter = 0;
+        dollarsymbol.SetActive(false);
+        mask_Bar.SetActive(false);
 
         createArticleContent.SetActive(true);
         newsBackground.SetActive(true);
