@@ -34,10 +34,18 @@ public class GameState : MonoBehaviour {
         counter = 0;
         replaceNumber = 0;
         gameOver = false;
-        headlineWithGap[0] = "Obama says :  Trump’s behaviour is           ";
+        headlineWithGap[0] = "Obama says: \nTrump’s behaviour is";
         replaceOptions1[0] = "Childish";
         replaceOptions2[0] = "Immature";
         replaceOptions3[0] = "Stupid";
+        headlineWithGap[1] = "Trump plans own army for";
+        replaceOptions1[1] = "space";
+        replaceOptions2[1] = "border guards";
+        replaceOptions3[1] = "white house";
+        headlineWithGap[2] = "US: withdrawal from";
+        replaceOptions1[2] = "Iraq";
+        replaceOptions2[2] = "UNO";
+        replaceOptions3[2] = "mexican wall";
 
         Button btn1 = createNewHeadlineButton.GetComponent<Button>();
         Button btn2 = submitNewHeadlineButton.GetComponent<Button>();
@@ -75,8 +83,8 @@ public class GameState : MonoBehaviour {
     void createNewHeadlineButtonClicked()
     {
         Debug.Log("createNewHeadlineButtonClicked()");
-        Lueckentext.GetComponent<Text>().text = headlineWithGap[counter];
-        Luecke.GetComponent<Text>().text = "_____";
+        Lueckentext.GetComponent<Text>().text = headlineWithGap[counter] + " _____";
+        //Luecke.GetComponent<Text>().text = "_____";
         replaceNumber = 0;
         createNewHeadlineButton.SetActive(false);
         submitNewHeadlineButton.SetActive(true);
@@ -84,6 +92,12 @@ public class GameState : MonoBehaviour {
         replaceButton2.SetActive(true);
         replaceButton3.SetActive(true);
         feedBackText.SetActive(false);
+        if (counter < 2)
+        {
+            replaceButton1.GetComponentInChildren<Text>().text = replaceOptions1[counter];
+            replaceButton2.GetComponentInChildren<Text>().text = replaceOptions2[counter];
+            replaceButton3.GetComponentInChildren<Text>().text = replaceOptions3[counter];
+        }
 
     }
 
@@ -111,29 +125,32 @@ public class GameState : MonoBehaviour {
             geld -= 500; //MIETE
             createNewHeadlineButton.SetActive(true);
             submitNewHeadlineButton.SetActive(false);
+            feedBackText.SetActive(true);
             replaceButton1.SetActive(false);
             replaceButton2.SetActive(false);
             replaceButton3.SetActive(false);
-            feedBackText.SetActive(true);
         }
     }
     void replaceButton1Clicked()
     {
         Debug.Log("replaceButton1Clicked()");
         replaceNumber = 1;
-        Luecke.GetComponent<Text>().text = replaceOptions1[counter];
+        string text = Lueckentext.GetComponent<Text>().text = headlineWithGap[counter];
+        Lueckentext.GetComponent<Text>().text = text + " " + replaceOptions1[counter];
     }
     void replaceButton2Clicked()
     {
         Debug.Log("replaceButton2Clicked()");
         replaceNumber = 2;
-        Luecke.GetComponent<Text>().text = replaceOptions2[counter];
+        string text = Lueckentext.GetComponent<Text>().text = headlineWithGap[counter];
+        Lueckentext.GetComponent<Text>().text = text + " " + replaceOptions2[counter];
     }
     void replaceButton3Clicked()
     {
         Debug.Log("replaceButton3Clicked()");
         replaceNumber = 3;
-        Luecke.GetComponent<Text>().text = replaceOptions3[counter];
+        string text = Lueckentext.GetComponent<Text>().text = headlineWithGap[counter];
+        Lueckentext.GetComponent<Text>().text = text + " " + replaceOptions3[counter];
     }
     void setFeedbackText()
     {
