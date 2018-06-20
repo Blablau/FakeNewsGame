@@ -39,18 +39,39 @@ public class GameState : MonoBehaviour {
         counter = 0;
         replaceNumber = 0;
         gameOver = false;
-        headlineWithGap[0] = "Obama says: \nTrump’s behaviour is";
+        headlineWithGap[0] = "Obama says: \nTrump’s behaviour is _____";
         replaceOptions1[0] = "Childish";
         replaceOptions2[0] = "Immature";
         replaceOptions3[0] = "Stupid";
-        headlineWithGap[1] = "Trump plans own army for";
-        replaceOptions1[1] = "space";
+        headlineWithGap[1] = "Trump plans own army for _____";
+        replaceOptions1[1] = "space"; // richtig
         replaceOptions2[1] = "border guards";
         replaceOptions3[1] = "white house";
-        headlineWithGap[2] = "US: withdrawal from";
+        headlineWithGap[2] = "US: withdrawal from _____";
         replaceOptions1[2] = "Iraq";
-        replaceOptions2[2] = "UNO";
+        replaceOptions2[2] = "UNO"; // richtig
         replaceOptions3[2] = "mexican wall";
+        headlineWithGap[3] = "Illegal crossing on external EU border \nthrough  _____";
+        replaceOptions1[3] = "Trump";
+        replaceOptions2[3] = "Icebear";
+        replaceOptions3[3] = "Cow"; // richtig
+        headlineWithGap[4] = "2017 there were _____ refugees in Germany!";
+        replaceOptions1[4] = "34.880 syrian";
+        replaceOptions2[4] = "60.000 syrian";
+        replaceOptions3[4] = "60.000 terrorist";
+        headlineWithGap[5] = "Investigations proved: _____ the Brexit vote!";
+        replaceOptions1[5] = "Twitter bots affected";
+        replaceOptions2[5] = "Twitter bots didn’t affect";
+        replaceOptions3[5] = "Twitter bots didn’t exist until after";
+        headlineWithGap[6] = "North Korean leader and Trump discussed _____";
+        replaceOptions1[6] = "nuclear disarmament";
+        replaceOptions2[6] = "nuclear wars";
+        replaceOptions3[6] = "nuclear wars in the future";
+        headlineWithGap[7] = "School shooter killed _____";
+        replaceOptions1[7] = "17 people";
+        replaceOptions2[7] = "17 children";
+        replaceOptions3[7] = "17 children like in video game shooter";
+
 
         Button btn1 = createNewHeadlineButton.GetComponent<Button>();
         Button btn2 = submitNewHeadlineButton.GetComponent<Button>();
@@ -92,7 +113,7 @@ public class GameState : MonoBehaviour {
     void createNewHeadlineButtonClicked()
     {
         Debug.Log("createNewHeadlineButtonClicked()");
-        Lueckentext.GetComponent<Text>().text = headlineWithGap[counter] + " _____";
+        Lueckentext.GetComponent<Text>().text = headlineWithGap[counter];
         //Luecke.GetComponent<Text>().text = "_____";
         replaceNumber = 0;
         //createNewHeadlineButton.SetActive(false);
@@ -104,7 +125,7 @@ public class GameState : MonoBehaviour {
         createArticleContent.SetActive(true);
         dashboardContent.SetActive(false);
 
-        if (counter < 2)
+        if (counter < 7)
         {
             replaceButton1.GetComponentInChildren<Text>().text = replaceOptions1[counter];
             replaceButton2.GetComponentInChildren<Text>().text = replaceOptions2[counter];
@@ -150,21 +171,24 @@ public class GameState : MonoBehaviour {
         Debug.Log("replaceButton1Clicked()");
         replaceNumber = 1;
         string text = Lueckentext.GetComponent<Text>().text = headlineWithGap[counter];
-        Lueckentext.GetComponent<Text>().text = text + " " + replaceOptions1[counter];
+        string newText = text.Replace("_____", replaceOptions1[counter]);
+        Lueckentext.GetComponent<Text>().text = newText;
     }
     void replaceButton2Clicked()
     {
         Debug.Log("replaceButton2Clicked()");
         replaceNumber = 2;
         string text = Lueckentext.GetComponent<Text>().text = headlineWithGap[counter];
-        Lueckentext.GetComponent<Text>().text = text + " " + replaceOptions2[counter];
+        string newText = text.Replace("_____", replaceOptions2[counter]);
+        Lueckentext.GetComponent<Text>().text = newText;
     }
     void replaceButton3Clicked()
     {
         Debug.Log("replaceButton3Clicked()");
         replaceNumber = 3;
         string text = Lueckentext.GetComponent<Text>().text = headlineWithGap[counter];
-        Lueckentext.GetComponent<Text>().text = text + " " + replaceOptions3[counter];
+        string newText = text.Replace("_____", replaceOptions3[counter]);
+        Lueckentext.GetComponent<Text>().text = newText;
     }
     void setFeedbackText()
     {
