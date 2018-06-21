@@ -24,6 +24,18 @@ public class GameState : MonoBehaviour {
     public GameObject badImage;
     public GameObject worstImage;
     public GameObject newsImage;
+    public GameObject newsImage1;
+    public GameObject newsImage2;
+    public GameObject newsImage3;
+    public GameObject newsImage4;
+    public GameObject newsImage5;
+    public GameObject newsImage6;
+    public GameObject newsImage7;
+    public GameObject newsImage8;
+    public GameObject newsImage9;
+    public GameObject newsImage10;
+    public GameObject newsImage11;
+    public GameObject newsImage12;
     public GameObject dollarsymbol;
     public GameObject mask_Bar;
     private string feedBackTextText;
@@ -44,7 +56,7 @@ public class GameState : MonoBehaviour {
     private int replaceNumber;
     private int pictureCounter;
     public bool gameOver;
-
+    private int countBitch = 0;
     public Image apoMeterImage;
     public Text moneyText;
     public GameObject createArticleContent;
@@ -92,7 +104,7 @@ public class GameState : MonoBehaviour {
         replaceOptions2[7] = "17 children";
         replaceOptions3[7] = "17 children like in video game shooter";
 
-
+        newsBackground.SetActive(true);
         Button btn1 = createNewHeadlineButton.GetComponent<Button>();
         Button btn2 = submitNewHeadlineButton.GetComponent<Button>();
         Button btn3 = replaceButton1.GetComponent<Button>();
@@ -222,15 +234,72 @@ public class GameState : MonoBehaviour {
     void pictureButtonClicked()
     {
         Debug.Log("pictureButtonClicked()");
-        string path = "./Assets/Resources/Images/" + imageOptions[pictureCounter];
-        Texture2D texture = loadImage(size, Path.GetFullPath(path));
-        newsImage.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite =
-            Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f), 100.0f);
-        pictureCounter++;
-        if(pictureCounter == imageOptions.Length)
+        
+
+        if (countBitch == 0)
         {
-            pictureCounter = 0;
+            newsImage1.SetActive(true);
+        } else if (countBitch == 1)
+        {
+            newsImage1.SetActive(false);
+            newsImage2.SetActive(true);
         }
+        else if (countBitch == 2)
+        {
+            newsImage2.SetActive(false);
+            newsImage3.SetActive(true);
+        }
+        else if (countBitch == 3)
+        {
+            newsImage3.SetActive(false);
+            newsImage4.SetActive(true);
+        }
+        else if (countBitch == 4)
+        {
+            newsImage4.SetActive(false);
+            newsImage5.SetActive(true);
+        }
+        else if (countBitch == 5)
+        {
+            newsImage5.SetActive(false);
+            newsImage6.SetActive(true);
+        }
+        else if (countBitch == 6)
+        {
+            newsImage6.SetActive(false);
+            newsImage7.SetActive(true);
+        }
+        else if (countBitch == 7)
+        {
+            newsImage7.SetActive(false);
+            newsImage8.SetActive(true);
+        }
+        else if (countBitch == 8)
+        {
+            newsImage8.SetActive(false);
+            newsImage9.SetActive(true);
+        }
+        else if (countBitch == 9)
+        {
+            newsImage9.SetActive(false);
+            newsImage10.SetActive(true);
+        }
+        else if (countBitch == 10)
+        {
+            newsImage10.SetActive(false);
+            newsImage11.SetActive(true);
+        }
+        else if (countBitch == 11)
+        {
+            newsImage11.SetActive(false);
+            newsImage12.SetActive(true);
+        }
+        else if (countBitch == 12)
+        {
+            countBitch = -1;
+        }
+        countBitch++;
+
     }
     void setFeedbackText()
     {
