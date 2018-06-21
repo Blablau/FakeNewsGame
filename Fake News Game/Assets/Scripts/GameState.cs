@@ -20,8 +20,10 @@ public class GameState : MonoBehaviour {
     public GameObject Lueckentext;
     public GameObject Luecke;
     public GameObject newsBackground;
+    public GameObject goodImage;
+    public GameObject badImage;
+    public GameObject worstImage;
     public GameObject newsImage;
-    public GameObject newspaperBackground;
     public GameObject dollarsymbol;
     public GameObject mask_Bar;
     private string feedBackTextText;
@@ -41,7 +43,6 @@ public class GameState : MonoBehaviour {
     public int counter;
     private int replaceNumber;
     private int pictureCounter;
-    private Vector3 newspaperBackground_pos;
     public bool gameOver;
 
     public Image apoMeterImage;
@@ -51,7 +52,7 @@ public class GameState : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        newspaperBackground_pos = newspaperBackground.transform.position;
+
         apocalypseMeter = 0;
         geld = 1000;
         counter = 0;
@@ -147,6 +148,9 @@ public class GameState : MonoBehaviour {
         newsBackground.SetActive(true);
         newsImage.SetActive(true);
         dashboardContent.SetActive(false);
+        goodImage.SetActive(false);
+        badImage.SetActive(false);
+        worstImage.SetActive(false);
 
         if (counter < 7)
         {
@@ -230,44 +234,23 @@ public class GameState : MonoBehaviour {
     }
     void setFeedbackText()
     {
-        string path = "./Assets/Resources/Sprites/";
 
+        string path = "./Assets/Resources/Sprites/";
+        newsBackground.SetActive(false);
 
 
         Debug.Log("setFeedbackText()");
         if (replaceNumber == 1)
         {
-            feedBackTextText = "gut";
-            path += image_newsGood;
+            goodImage.SetActive(true);
         } else if (replaceNumber == 2)
         {
-            feedBackTextText = "nicht gut";
-            path += image_newsBad;
+            badImage.SetActive(true);
         } else if (replaceNumber == 3)
         {
-            feedBackTextText = "schlecht";
-            path += image_newsVeryBad;
+            worstImage.SetActive(true);
         }
 
-
-        //TODO Set position correctly
-        if (replaceNumber != 0)
-        {
-            Texture2D texture = loadImage(size, Path.GetFullPath(path));
-            //newspaperBackground.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite =
-            newspaperBackground.GetComponent<SpriteRenderer>().sprite =
-                Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(1f, 1f), 100.0f);
-            newspaperBackground.transform.position = newspaperBackground_pos;
-        }
-        else
-        {
-            path += image_news;
-            Texture2D texture = loadImage(size, Path.GetFullPath(path));
-            //newspaperBackground.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite =
-            newspaperBackground.GetComponent<SpriteRenderer>().sprite =
-                Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(1f, 1f), 100.0f);
-            newspaperBackground.transform.position = newspaperBackground_pos;
-        }
         replaceNumber = 0;
     }
     void gameOverGutMethod()
@@ -281,6 +264,9 @@ public class GameState : MonoBehaviour {
         feedBackText.SetActive(true);
         pictureButton.SetActive(false);
         apoMeterImage.enabled = false;
+        goodImage.SetActive(false);
+        badImage.SetActive(false);
+        worstImage.SetActive(false);
         moneyText.enabled = false;
         apocalypseMeter = 0;
         dollarsymbol.SetActive(false);
@@ -307,6 +293,9 @@ public class GameState : MonoBehaviour {
         replaceButton1.SetActive(false);
         replaceButton2.SetActive(false);
         replaceButton3.SetActive(false);
+        goodImage.SetActive(false);
+        badImage.SetActive(false);
+        worstImage.SetActive(false);
         feedBackText.SetActive(true);
         pictureButton.SetActive(false);
         apoMeterImage.enabled = false;
